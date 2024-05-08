@@ -723,13 +723,14 @@ public class SmartConnect {
 	 * @return returns the details of historic data.
 	 */
 	public JSONArray candleData(JSONObject params) {
+		JSONObject response = null;
 		try {
 			String url = routes.get("api.candle.data");
-			JSONObject response = smartAPIRequestHandler.postRequest(this.apiKey, url, params, accessToken);
-			log.info("response : {}",response);
+			response = smartAPIRequestHandler.postRequest(this.apiKey, url, params, accessToken);
 			return response.getJSONArray("data");
 		} catch (Exception | SmartAPIException e) {
-			log.error(e.getMessage());
+			log.error(params.toString());
+			log.error(response.toString());
 			return null;
 		}
 	}
